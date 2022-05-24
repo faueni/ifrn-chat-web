@@ -1,7 +1,5 @@
 import React from "react";
-import {AppContainer} from '../src/components/AppContainerComponent';
-import {AppInput} from '../src/components/AppInputComponent';
-import {AppButton} from '../src/components/AppButtonComponent';
+import {AppContainer, AppButton, AppInput} from '../src/components';
 
 const Login = props => {
     return (
