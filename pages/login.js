@@ -1,30 +1,53 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Head from 'next/head';
+import {useRouter} from 'next/router';
 import {AppContainer} from '../src/components/AppContainerComponent';
 import {AppInput} from '../src/components/AppInputComponent';
 import {AppButton} from '../src/components/AppButtonComponent';
-import { useRouter } from 'next/router';
 
 const Login = props => {
-	const router = useRouter();
-	return (
-		<div>
-			<Head>
-				<title>página de login</title>
-			</Head>
-			<main>
-				<nav>
-					<p>Chat de Infoweb</p>
-					<button onClick={() => router.back()}>voltar</button>
-				</nav>
-				<AppContainer>
-					<AppInput title="apelido ou email do usuário" label="Usuário:" type="text"/>
-					<AppInput label="Senha:" type="password" title="senha do usuário" />
-					<AppButton title="Entrar" />
-				</AppContainer>
-			</main>
-		</div>
-	);
+  const router = useRouter ();
+  const [name, setName] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleChangeName = (event) => {
+    setName(event.target.value);
+  }
+
+  return (
+    <div>
+      <Head>
+        <title>Infoweb chat - Login</title>
+      </Head>
+      <main>
+        <AppContainer>
+          <AppInput 
+            label="Usuário" 
+            title="apelido ou email do usuário" 
+            value={name} 
+            onChange={handleChangeName}
+          />
+          <AppInput 
+            label="Senha" 
+            type="password" 
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <AppButton
+            onClick={event => router.back ()}
+            label="voltar"
+            color="secondary"
+          />
+          <AppButton
+            title="Clique aqui para entrar no chat"
+            label="Entrar no chat"
+            variant='contained'
+            disabled={!(!!name && !!password)}
+          />
+        </AppContainer>
+      </main>
+    </div>
+  );
 };
 
 export default Login;
