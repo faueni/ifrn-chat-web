@@ -20,7 +20,7 @@ const Login = props => {
                     <AppInput title="senha do usuário" label="Senha" type="password" />
 
                     <AppButton 
-                        onClick={event => router.back}
+                        onClick={event => router.back()}
                         label="voltar"
                         color="secondary"
                     />
