@@ -11,7 +11,7 @@ export const AppButton = (props) => {
       color={color_button}
       onClick={handle_click}
       title={props.title}
-      href={href_button}
+      {...props}
     >
       {props.label}
     </Button>
