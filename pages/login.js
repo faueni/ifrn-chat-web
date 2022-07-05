@@ -43,6 +43,7 @@ const Login = props => {
             label="Entrar no chat"
             variant='contained'
             disabled={!(!!name && !!password)}
+            onClick={(e) => { props.router.push({ path: "/", query: { name: name, hash: password } }) }}
           />
         </AppContainer>
       </main>
