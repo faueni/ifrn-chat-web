@@ -9,16 +9,16 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 
 const AppLoginLogoutButton = (props) => {
-  if (!props.login) {
+  if (!props.login()) {
     return <AppButton color="inherit" label="Login" href="/login" />;
   } else {
-     return (
+      return (
         <AppButton
-           color="inherit"
-           label="logout"
-           onClick={(e) => null}
+          color="inherit"
+          label="logout"
+          onClick={(e) => props.onLogout(e)}
         />
-     );
+      );
   }
 };
 
@@ -38,15 +38,18 @@ const AppNavBar = (props) => {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
               {props.title}
           </Typography>
-          <AppLoginLogoutButton login={props.userLogged} />        
+          <AppLoginLogoutButton 
+            login={props.userLogged}
+            onLogout={props.logoutFunction}
+          />        
         </Toolbar>
     </AppBar>
   );
 };
 
 export default function Home() {
-
-  const [sessionId, setSessionId] = useState("");
+  const router = useRouter();
+  const [sessionId, setSessionId] = useState(router.query.hash ?? "");
   const isUserLogged = () => (sessionId ? true : false);
 
   return (
@@ -61,6 +64,7 @@ export default function Home() {
           <AppNavBar
               title="Chat de Infoweb"
               userLogged={isUserLogged}
+              logoutFunction={(e) => setSessionId("")}
           />
           <h1>Landing page do chat de Infoweb</h1>
         </main>
